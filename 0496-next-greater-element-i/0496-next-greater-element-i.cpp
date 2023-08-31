@@ -13,12 +13,12 @@ public:
             int res = (st.empty()) ? -1 : st.top();
             // insert in map
             umap.insert({ele,res});
-            st.push(ele);
-        }
+            st.push(ele); // push every lement in st
+        } // vecot which has elemnt greater traversing over map
         vector<int> ans;
         for(auto x: nums1){
             ans.push_back(umap[x]);
         }
         return ans;
     }
-};
+}; 
