@@ -1,21 +1,27 @@
 class Solution {
 public:
+    int t[101][101]; // constriant mai max length is 100
+    int solve(int i, int j,int m, int n){
+
+        if(i < 0 || i>=m || j < 0 || j >= n){
+            return 0;
+        }
+
+        if(i == m-1 && j == n-1)
+          return 1;
+
+        if(t[i][j] != -1)
+         return t[i][j];  
+
+        int right = solve(i, j+1,m,n) ; // right mai gay toh row same col change
+        int down =  solve(i+1,j,m,n); // row change
+
+        return t[i][j] = right+down;
+
+    }
+    
     int uniquePaths(int m, int n) {
-        vector<vector<int>> dp(m, vector<int>(n, 0));
-        
-        for (int i = 0; i < m; ++i) {
-            dp[i][0] = 1;
-        }
-        for (int j = 0; j < n; ++j) {
-            dp[0][j] = 1;
-        }
-        
-        for (int i = 1; i < m; ++i) {
-            for (int j = 1; j < n; ++j) {
-                dp[i][j] = dp[i-1][j] + dp[i][j-1];
-            }
-        }
-        
-        return dp[m-1][n-1];
+        memset(t,-1,sizeof(t));
+        return solve(0,0,m,n);
     }
 };
